@@ -7,9 +7,9 @@ Las tecnologias empleadas en el desarrollo son:
 
 Nuestro equipo esta conformado por
 
-| Colaboradores |    |  | 
+| Colaboradores | Correo | 
 |---|---|---|
-| Monica Rivera | - | - |
-| Victor  Pineda | - | vpinedaa@unah.hn |
-| José Solis | - | slmarmanuel@gmail.com |
-| William Quijano | - | - |
+| Monica Rivera | - |
+| Victor  Pineda | vpinedaa@unah.hn |
+| José Solis | slmarmanuel@gmail.com |
+| William Quijano | - |
