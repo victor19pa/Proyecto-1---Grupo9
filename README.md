@@ -9,7 +9,8 @@ Nuestro equipo esta conformado por
 
 | Colaboradores | Correo | 
 |---|---|
-| Monica Rivera | - |
+| Monica Rivera | monikrivera97@gmail.com |
 | Victor  Pineda | vpinedaa@unah.hn |
 | José Solis | slmarmanuel@gmail.com |
-| William Quijano | - |
+| William Quijano | wdaniloq@gmail.com |
+| Axel Reyes | enriqueaxelreyesromero.151197@gmail.com |
