@@ -352,6 +352,7 @@ public class Principal extends javax.swing.JFrame {
     private void jBtnAddFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddFlightActionPerformed
         // TODO add your handling code here:
         addFlight();
+        addAirplane();
     }//GEN-LAST:event_jBtnAddFlightActionPerformed
 
     private void jBtnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModifyActionPerformed
@@ -371,17 +372,28 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void addFlight(){
-        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
-        
-        boolean status;
+    public void addAirplane(){
+        boolean status=true;
         if(jRbtnAvailable.isSelected())
             status = true;
         else if(jRbtnNonAvailable.isSelected())
             status = false;
-        
-        char c;
+        //empty instance
+        EAirplane a = new EAirplane();
+        //add values
+        a.setAvailability(status);
+        a.setModel(jTxtModel.getText());
+        a.setPassengerCapacity(Integer.parseInt(jTxtPassenger.getText()));
+        a.setTankCapacity(Double.parseDouble(jTxtTank.getText()));
+        //add to Arraylist
+        airplanes.add(a);
+    }
+    
+    public void addFlight(){
+        JOptionPane.showInputDialog("Add Record");
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
+             
+        char c='O';
         if(jRbtnDelay.isSelected())
             c='D';
         else if(jRbtnLanded.isSelected())
@@ -389,14 +401,23 @@ public class Principal extends javax.swing.JFrame {
         else if(jRbtnOnAir.isSelected())
             c='O';
         
+        //Empty instance
+        EFlight f = new EFlight();
+        //add info
+        f.setAirline(jTxtAirline.getText());
+        f.setOrigin(jTxtOrigin.getText());
+        f.setDestiny(jTxtDestiny.getText());
+        /* Parse String to Date
+        f.setArrivalTime();
+        f.setExpectedArrivalTime();
+        f.setDepartureTime();
+        f.setExpectedDepartureTime();
+        */
+        f.setStatus(c);
         
-        airplanes.add(new EAirplane(
-        
-        ));
-        
-        flights.add(new EFlight(
-               
-        ));
+        //f.setAirplane(); AGREGAR AIRPLANE DEL PRIMER ARRAY
+        //add to array
+        flights.add(f);
         showFlight();
     }
     public void showFlight(){
