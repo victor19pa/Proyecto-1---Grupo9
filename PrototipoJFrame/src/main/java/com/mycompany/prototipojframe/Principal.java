@@ -380,7 +380,7 @@ public class Principal extends javax.swing.JFrame {
             status = false;
         //empty instance
         EAirplane a = new EAirplane();
-        //add values
+        //add values to a
         a.setAvailability(status);
         a.setModel(jTxtModel.getText());
         a.setPassengerCapacity(Integer.parseInt(jTxtPassenger.getText()));
