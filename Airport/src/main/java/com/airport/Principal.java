@@ -480,8 +480,8 @@ public class Principal extends javax.swing.JFrame {
     public void modifyAirplane(){
         JOptionPane.showMessageDialog(null,"Here airplanes will be modify");
         //select index
-        int indexModify = Integer.parseInt(JOptionPane.showInputDialog("Which Id record?"
-                + "from 0 to "+ (airplanes.size()-1)+")"));
+        int indexModify = Integer.parseInt(JOptionPane.showInputDialog("Which Id record"
+                + "from 0 to "+ (airplanes.size()-1)+")?"));
         EAirplane airplaneMod = airplanes.get(indexModify);
         //add info
         addAirplane();
@@ -519,8 +519,8 @@ public class Principal extends javax.swing.JFrame {
     public void modifyFlight(){
         JOptionPane.showMessageDialog(null,"Here flights will be modify");
         //select index
-        int indexModify = Integer.parseInt(JOptionPane.showInputDialog("Which Id record?"
-                + "from 0 to "+ (flights.size()-1)+")"));
+        int indexModify = Integer.parseInt(JOptionPane.showInputDialog("Which Id record"
+                + "from 0 to "+ (flights.size()-1)+")?"));
         EFlight flightMod = flights.get(indexModify);
         //add info
         addFlight();
