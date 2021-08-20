@@ -628,13 +628,13 @@ public class Principal extends javax.swing.JFrame {
         EFlight fli = new EFlight();
         //add info
         fli.setAirline(txtAirline.getText());
-        //fli.setAirplane();
-        //fli.setArrivalTime();
+        fli.setAirplane(Integer.parseInt(txtAirplaneID.getText()));
+        fli.setArrivalTime(txtArrivalTime.getText());
         fli.setBinnacle(txtABinnacle.getText());
-        //fli.setDepartureTime();
+        fli.setDepartureTime(txtDepartureTime.getText());
         fli.setDestiny(txtDestiny.getText());
         //fli.setExpectedArrivalTime();
-        //fli.setIdFlight();
+        fli.setIdFlight(flights.size());
         fli.setOrigin(txtOrigin.getText());
         fli.setStatus(status);
 

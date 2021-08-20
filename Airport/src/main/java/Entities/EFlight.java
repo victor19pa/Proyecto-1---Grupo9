@@ -16,12 +16,12 @@ public class EFlight {
     private int idFlight;
     private String origin;
     private String destiny;
-    private Date departureTime;
-    private Date expectedTime;
-    private Date arrivalTime;
-    private Date expectedArrivalTime;
+    private String departureTime;
+    private int expectedTime;
+    private String arrivalTime;
+    private int expectedArrivalTime;
     private String airline;
     private String binnacle;
     private char status;
-    private EAirplane airplane;
+    private int airplane;
 }
