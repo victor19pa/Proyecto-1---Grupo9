@@ -2,18 +2,31 @@ package com.airport;
 
 import Entities.EAirplane;
 import Entities.EFlight;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Principal extends javax.swing.JFrame {
+
     private ArrayList<EAirplane> airplanes;
     private ArrayList<EFlight> flights;
-    
+    DefaultTableModel model;
+    DefaultTableModel model2;
+
     public Principal() {
         airplanes = new ArrayList<EAirplane>();
         flights = new ArrayList<EFlight>();
         initComponents();
+//        tblInfoMain.addMouseListener(new MouseAdapter() {
+//            public void mouseClicked(MouseEvent e) {
+//               clickDetailsFlight();
+//            }
+//        });
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,10 +88,16 @@ public class Principal extends javax.swing.JFrame {
         btnModifyAirplane = new javax.swing.JButton();
         btnExportCatalog = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tAirplanes = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Airport System");
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         btnImportDoc.setText("Import Document");
 
@@ -93,6 +112,11 @@ public class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblInfoMain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblInfoMainMouseClicked(evt);
+            }
+        });
         scrollPaneMain.setViewportView(tblInfoMain);
 
         jLabel1.setText("Flight ID:");
@@ -271,11 +295,12 @@ public class Principal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(txtFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAddFlightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblOrigin)
+                .addGroup(panelAddFlightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtOrigin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblArrivalTime)
-                    .addComponent(txtArrivalTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelAddFlightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblOrigin)
+                        .addComponent(lblArrivalTime)
+                        .addComponent(txtArrivalTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelAddFlightsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAddFlightsLayout.createSequentialGroup()
@@ -318,8 +343,10 @@ public class Principal extends javax.swing.JFrame {
 
         lblAvailable.setText("Availability:");
 
+        btnGroupAirplanes.add(rBtnAvailable);
         rBtnAvailable.setText("Available");
 
+        btnGroupAirplanes.add(rBtnNonAvailable);
         rBtnNonAvailable.setText("Non Available");
 
         btnAddAirplane.setText("Add Airplane");
@@ -338,7 +365,7 @@ public class Principal extends javax.swing.JFrame {
 
         btnExportCatalog.setText("Expot Catalog");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tAirplanes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -349,7 +376,12 @@ public class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        tAirplanes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tAirplanesMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tAirplanes);
 
         javax.swing.GroupLayout panelAirplanesLayout = new javax.swing.GroupLayout(panelAirplanes);
         panelAirplanes.setLayout(panelAirplanesLayout);
@@ -443,12 +475,27 @@ public class Principal extends javax.swing.JFrame {
     private void btnAddAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAirplaneActionPerformed
         // TODO add your handling code here:
         addAirplane();
+        loadTableAirplanes();
     }//GEN-LAST:event_btnAddAirplaneActionPerformed
 
     private void btnModifyAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyAirplaneActionPerformed
         // TODO add your handling code here:
         modifyAirplane();
+        loadTableAirplanes();
     }//GEN-LAST:event_btnModifyAirplaneActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        loadTableFlights();
+        loadTableAirplanes();
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void tblInfoMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblInfoMainMouseClicked
+        clickDetailsFlight();
+    }//GEN-LAST:event_tblInfoMainMouseClicked
+
+    private void tAirplanesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tAirplanesMouseClicked
+        clickDetailsAirplane();
+    }//GEN-LAST:event_tAirplanesMouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -457,49 +504,66 @@ public class Principal extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void addAirplane(){
-        JOptionPane.showMessageDialog(null,"Here airplanes will be add");
-        
+
+    public void addAirplane() {
+//        JOptionPane.showMessageDialog(null, "Here airplanes will be add");
+
         boolean a = true;
-        if(rBtnAvailable.isSelected())
+        if (rBtnAvailable.isSelected()) {
             a = true;
-        else if(rBtnNonAvailable.isSelected())
+        } else if (rBtnNonAvailable.isSelected()) {
             a = false;
+        }
         //empty instance
         EAirplane air = new EAirplane();
-       //set infor
+        //set infor
         air.setAvailable(a);
         air.setModel(txtModelAirplane.getText());
         air.setPassengerCapacity(Integer.parseInt(txtPassengerCap.getText()));
         air.setTankCapacity(Double.parseDouble(txtTankCap.getText()));
-        //air.setIdAirplane();
-        
+        air.setIdAirplane(airplanes.size());
+
         airplanes.add(air);
     }
-    public void modifyAirplane(){
-        JOptionPane.showMessageDialog(null,"Here airplanes will be modify");
+
+    public void modifyAirplane() {
+        JOptionPane.showMessageDialog(null, "Here airplanes will be modify");
         //select index
         int indexModify = Integer.parseInt(JOptionPane.showInputDialog("Which Id record"
-                + "from 0 to "+ (airplanes.size()-1)+")?"));
-        EAirplane airplaneMod = airplanes.get(indexModify);
+                + "from 0 to " + (airplanes.size() - 1) + ")?"));
+        EAirplane airplaneMod = new EAirplane();
+        airplaneMod.setModel(txtModelAirplane.getText());
+        airplaneMod.setPassengerCapacity(Integer.parseInt(txtPassengerCap.getText()));
+        airplaneMod.setTankCapacity(Double.parseDouble(txtTankCap.getText()));
+          boolean a = true;
+        if (rBtnAvailable.isSelected()) {
+            a = true;
+        } else if (rBtnNonAvailable.isSelected()) {
+            a = false;
+        }
+       
+        airplaneMod.setAvailable(a);      
         //add info
-        addAirplane();
+        //addAirplane();
         //modify index
         airplanes.set(indexModify, airplaneMod);
-    }
-    public void addFlight(){
-        JOptionPane.showMessageDialog(null,"Here flights will be add");
-        char status = 'X';
-        if(rBtnActived.isSelected())
-            status = 'A';
-        else if(rBtnCancel.isSelected())
-            status = 'C';
-        else if(rBtnDelayed.isSelected())
-            status = 'D';
-        else if(rBtnLanded.isSelected())
-            status = 'L';
         
+       
+    }
+
+    public void addFlight() {
+        JOptionPane.showMessageDialog(null, "Here flights will be add");
+        char status = 'X';
+        if (rBtnActived.isSelected()) {
+            status = 'A';
+        } else if (rBtnCancel.isSelected()) {
+            status = 'C';
+        } else if (rBtnDelayed.isSelected()) {
+            status = 'D';
+        } else if (rBtnLanded.isSelected()) {
+            status = 'L';
+        }
+
         //empty instance
         EFlight fli = new EFlight();
         //add info
@@ -516,16 +580,116 @@ public class Principal extends javax.swing.JFrame {
 
         flights.add(fli);
     }
-    public void modifyFlight(){
-        JOptionPane.showMessageDialog(null,"Here flights will be modify");
+
+    public void modifyFlight() {
+        JOptionPane.showMessageDialog(null, "Here flights will be modify");
         //select index
         int indexModify = Integer.parseInt(JOptionPane.showInputDialog("Which Id record"
-                + "from 0 to "+ (flights.size()-1)+")?"));
+                + "from 0 to " + (flights.size() - 1) + ")?"));
         EFlight flightMod = flights.get(indexModify);
         //add info
         addFlight();
         //modify index
         flights.set(indexModify, flightMod);
+    }
+
+    public void loadTableFlights() {
+        model = new DefaultTableModel();
+        model.addColumn("Flight");
+        model.addColumn("Airplane");
+        model.addColumn("Origin");
+        model.addColumn("Destinity");
+        model.addColumn("Status");
+        model.addColumn("");
+
+        if (flights.size() > 0) {
+            for (EFlight flight : flights) {
+                model.addRow(new Object[]{flight.getIdFlight(),
+                    flight.getAirline(),
+                    flight.getOrigin(),
+                    flight.getDestiny(),
+                    flight.getStatus(), "Details"});
+
+            }
+            
+        }tblInfoMain.setModel(model);
+    }
+
+    public void loadTableAirplanes() {
+        model2 = new DefaultTableModel();
+
+        model2.addColumn("Airplane");
+        model2.addColumn("Model");
+        model2.addColumn("Tank Capacity");
+        model2.addColumn("Passenger Capacity");
+        model2.addColumn("Availability");
+        model2.addColumn("");
+        if (airplanes.size() > 0) {
+           
+            for (EAirplane airplane : airplanes) {
+                
+                String status = "Available";
+                if (!airplane.isAvailable()) {
+                    status = "Not available";
+                }
+
+                model2.addRow(new Object[]{
+                    airplane.getIdAirplane(),
+                    airplane.getModel(),
+                    airplane.getTankCapacity(),
+                    airplane.getPassengerCapacity(),
+                    status,
+                    "Details"});
+
+            }
+
+        }tAirplanes.setModel(model2);
+        
+    }
+
+    public void clickDetailsFlight() {
+        if (tblInfoMain.getSelectedColumn() == 5) {
+            int rowSelected = tblInfoMain.getSelectedRow();
+
+            txtFlight.setText(String.valueOf(flights.get(rowSelected).getIdFlight()));
+            txtOrigin.setText(flights.get(rowSelected).getOrigin());
+            txtDestiny.setText(flights.get(rowSelected).getDestiny());
+            txtAirline.setText(flights.get(rowSelected).getAirline());
+            txtAirplaneID.setText(String.valueOf(flights.get(rowSelected).getAirplane()));
+            txtDepartureTime.setText(String.valueOf(flights.get(rowSelected).getDepartureTime()));
+            txtArrivalTime.setText(String.valueOf(flights.get(rowSelected).getArrivalTime()));
+            char status = flights.get(rowSelected).getStatus();
+
+            if (status == 'A') {
+                rBtnActived.setSelected(true);
+            } else if (status == 'C') {
+                rBtnCancel.setSelected(true);
+            } else if (status == 'D') {
+                rBtnDelayed.setSelected(true);
+            } else if (status == 'L') {
+                rBtnLanded.setSelected(true);;
+            }
+
+            txtABinnacle.setText(flights.get(rowSelected).getBinnacle());
+
+        }
+    }
+    public void  clickDetailsAirplane(){
+         if (tAirplanes.getSelectedColumn() == 5) {
+            int rowSelected = tAirplanes.getSelectedRow();
+
+            txtModelAirplane.setText(String.valueOf(airplanes.get(rowSelected).getModel()));
+            txtPassengerCap.setText(String.valueOf(airplanes.get(rowSelected).getPassengerCapacity()));
+            txtTankCap.setText(String.valueOf(airplanes.get(rowSelected).getTankCapacity()));
+            
+            if (airplanes.get(rowSelected).isAvailable()) {
+               rBtnAvailable.setSelected(true);
+            } else {
+                rBtnNonAvailable.setSelected(true);
+            }
+
+           
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -544,7 +708,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAirplane;
     private javax.swing.JLabel lblAirplaneIDFlight;
     private javax.swing.JLabel lblArrivalTime;
@@ -567,6 +730,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton rBtnLanded;
     private javax.swing.JRadioButton rBtnNonAvailable;
     private javax.swing.JScrollPane scrollPaneMain;
+    private javax.swing.JTable tAirplanes;
     private javax.swing.JTable tblInfoMain;
     private javax.swing.JTextArea txtABinnacle;
     private javax.swing.JTextField txtAirline;

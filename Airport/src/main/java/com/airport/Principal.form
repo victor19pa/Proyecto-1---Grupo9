@@ -41,6 +41,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jTabbedPane1StateChanged"/>
+      </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -132,6 +135,9 @@
                       </Table>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblInfoMainMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -270,11 +276,13 @@
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtOrigin" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblArrivalTime" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtArrivalTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblOrigin" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblArrivalTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtArrivalTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -554,11 +562,17 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="rBtnAvailable">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="btnGroupAirplanes"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Available"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JRadioButton" name="rBtnNonAvailable">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="btnGroupAirplanes"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Non Available"/>
               </Properties>
             </Component>
@@ -590,7 +604,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="tAirplanes">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="4">
@@ -601,6 +615,9 @@
                       </Table>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tAirplanesMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
