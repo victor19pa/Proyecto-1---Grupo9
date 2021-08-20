@@ -1,11 +1,15 @@
 package com.airport;
 
+import Classes.Email;
 import Entities.EAirplane;
 import Entities.EFlight;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -121,11 +125,22 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1.setText("Flight ID:");
 
+        txtIdSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdSendActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Date:");
 
         jLabel3.setText("Email:");
 
         btnSendEmail.setText("Send Email");
+        btnSendEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendEmailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelFlightsLayout = new javax.swing.GroupLayout(panelFlights);
         panelFlights.setLayout(panelFlightsLayout);
@@ -496,6 +511,28 @@ public class Principal extends javax.swing.JFrame {
     private void tAirplanesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tAirplanesMouseClicked
         clickDetailsAirplane();
     }//GEN-LAST:event_tAirplanesMouseClicked
+
+    private void btnSendEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendEmailActionPerformed
+        // TODO add your handling code here:
+        Email sendMail = new Email();
+        if(txtDateSend.getText().length() > 0)
+        {
+            try
+            {
+                sendMail.sendReportbyDate(txtDateSend.getText(), txtEmailSend.getText(), flights);
+            } catch (ParseException ex)
+            {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(txtIdSend.getText().length() > 0){
+            sendMail.sendReportbyId(Integer.parseInt(txtIdSend.getText()), txtEmailSend.getText(), flights);
+        }
+    }//GEN-LAST:event_btnSendEmailActionPerformed
+
+    private void txtIdSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdSendActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdSendActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
