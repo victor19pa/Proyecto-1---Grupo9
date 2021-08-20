@@ -1,5 +1,6 @@
 package com.airport;
 
+import Classes.Email;
 import Entities.EAirplane;
 import Entities.EFlight;
 import java.awt.event.MouseAdapter;
@@ -9,6 +10,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -144,6 +146,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel3.setText("Email:");
 
         btnSendEmail.setText("Send Email");
+        btnSendEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendEmailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelFlightsLayout = new javax.swing.GroupLayout(panelFlights);
         panelFlights.setLayout(panelFlightsLayout);
@@ -557,6 +564,24 @@ public class Principal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnImportDocActionPerformed
 
+    private void btnSendEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendEmailActionPerformed
+        // TODO add your handling code here:
+        Email sendMail = new Email();
+        if(txtDateSend.getText().length() > 0)
+        {
+            try
+            {
+                sendMail.sendReportbyDate(txtDateSend.getText(), txtEmailSend.getText(), flights);
+            } catch (ParseException ex)
+            {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        if(txtIdSend.getText().length() > 0){
+            sendMail.sendReportbyId(Integer.parseInt(txtIdSend.getText()), txtEmailSend.getText(), flights);
+        }
+    }//GEN-LAST:event_btnSendEmailActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -588,6 +613,12 @@ public class Principal extends javax.swing.JFrame {
 
     public void modifyAirplane() {
         JOptionPane.showMessageDialog(null, "Here airplanes will be modify");
+        boolean a = true;
+        if (rBtnAvailable.isSelected()) {
+            a = true;
+        } else if (rBtnNonAvailable.isSelected()) {
+            a = false;
+        }
         //select index
         int indexModify = Integer.parseInt(JOptionPane.showInputDialog("Which Id record"
                 + "from 0 to " + (airplanes.size() - 1) + ")?"));
@@ -595,13 +626,6 @@ public class Principal extends javax.swing.JFrame {
         airplaneMod.setModel(txtModelAirplane.getText());
         airplaneMod.setPassengerCapacity(Integer.parseInt(txtPassengerCap.getText()));
         airplaneMod.setTankCapacity(Double.parseDouble(txtTankCap.getText()));
-          boolean a = true;
-        if (rBtnAvailable.isSelected()) {
-            a = true;
-        } else if (rBtnNonAvailable.isSelected()) {
-            a = false;
-        }
-       
         airplaneMod.setAvailable(a);      
         //add info
         //addAirplane();
@@ -627,7 +651,7 @@ public class Principal extends javax.swing.JFrame {
         //empty instance
         EFlight fli = new EFlight();
         //add info
-        fli.setAirline(txtAirline.getText());
+        //fli.setAirline(txtAirline.getText());
         fli.setAirplane(Integer.parseInt(txtAirplaneID.getText()));
         fli.setArrivalTime(txtArrivalTime.getText());
         fli.setBinnacle(txtABinnacle.getText());
@@ -646,9 +670,29 @@ public class Principal extends javax.swing.JFrame {
         //select index
         int indexModify = Integer.parseInt(JOptionPane.showInputDialog("Which Id record"
                 + "from 0 to " + (flights.size() - 1) + ")?"));
+        char status = 'X';
+        if (rBtnActived.isSelected()) {
+            status = 'A';
+        } else if (rBtnCancel.isSelected()) {
+            status = 'C';
+        } else if (rBtnDelayed.isSelected()) {
+            status = 'D';
+        } else if (rBtnLanded.isSelected()) {
+            status = 'L';
+        }
         EFlight flightMod = flights.get(indexModify);
         //add info
-        addFlight();
+        flightMod.setAirline(txtAirline.getText());
+        flightMod.setAirplane(Integer.parseInt(txtAirplaneID.getText()));
+        flightMod.setArrivalTime(txtArrivalTime.getText());
+        flightMod.setBinnacle(txtABinnacle.getText());
+        flightMod.setDepartureTime(txtDepartureTime.getText());
+        flightMod.setDestiny(txtDestiny.getText());
+        //fli.setExpectedArrivalTime();
+        flightMod.setIdFlight(flights.size());
+        flightMod.setOrigin(txtOrigin.getText());
+        flightMod.setStatus(status);
+        //addFlight();
         //modify index
         flights.set(indexModify, flightMod);
     }
