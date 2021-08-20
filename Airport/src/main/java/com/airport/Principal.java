@@ -651,7 +651,7 @@ public class Principal extends javax.swing.JFrame {
         //empty instance
         EFlight fli = new EFlight();
         //add info
-        //fli.setAirline(txtAirline.getText());
+        fli.setAirline(txtAirline.getText());
         fli.setAirplane(Integer.parseInt(txtAirplaneID.getText()));
         fli.setArrivalTime(txtArrivalTime.getText());
         fli.setBinnacle(txtABinnacle.getText());
@@ -701,6 +701,7 @@ public class Principal extends javax.swing.JFrame {
         model = new DefaultTableModel();
         model.addColumn("Flight");
         model.addColumn("Airplane");
+        model.addColumn("Airline");
         model.addColumn("Origin");
         model.addColumn("Destinity");
         model.addColumn("Status");
@@ -708,7 +709,9 @@ public class Principal extends javax.swing.JFrame {
 
         if (flights.size() > 0) {
             for (EFlight flight : flights) {
-                model.addRow(new Object[]{flight.getIdFlight(),
+                model.addRow(new Object[]{
+                    flight.getIdFlight(),
+                    flight.getAirplane(),
                     flight.getAirline(),
                     flight.getOrigin(),
                     flight.getDestiny(),
@@ -752,7 +755,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     public void clickDetailsFlight() {
-        if (tblInfoMain.getSelectedColumn() == 5) {
+        if (tblInfoMain.getSelectedColumn() == 6) {
             int rowSelected = tblInfoMain.getSelectedRow();
 
             txtFlight.setText(String.valueOf(flights.get(rowSelected).getIdFlight()));
