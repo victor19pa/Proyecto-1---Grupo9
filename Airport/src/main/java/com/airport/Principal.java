@@ -5,9 +5,22 @@ import Entities.EFlight;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -100,6 +113,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         btnImportDoc.setText("Import Document");
+        btnImportDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportDocActionPerformed(evt);
+            }
+        });
 
         tblInfoMain.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -412,7 +430,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(rBtnAvailable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rBtnNonAvailable))
-                    .addComponent(btnExportCatalog, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
+                    .addComponent(btnExportCatalog, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(34, 34, 34))
             .addGroup(panelAirplanesLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -496,6 +514,48 @@ public class Principal extends javax.swing.JFrame {
     private void tAirplanesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tAirplanesMouseClicked
         clickDetailsAirplane();
     }//GEN-LAST:event_tAirplanesMouseClicked
+
+    private void btnImportDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportDocActionPerformed
+       File excelFile;
+       FileInputStream fis = null;
+       BufferedInputStream bis = null; 
+       HSSFWorkbook wb = null;
+       Sheet sheet = null;
+       
+       String defaultCurrentDirectoryPath = "C:\\Users\\Public\\Desktop";
+       JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
+       int excelChooser = excelFileChooser.showOpenDialog(null);
+       
+       
+        if (excelChooser == JFileChooser.APPROVE_OPTION) {
+           
+           try {
+               excelFile = excelFileChooser.getSelectedFile();
+               fis = new FileInputStream(excelFile);
+               bis = new BufferedInputStream(fis);
+               
+               wb = new HSSFWorkbook(bis);
+               sheet = wb.getSheetAt(0);
+               
+               for (int row = 0; row < sheet.getLastRowNum(); row++) {
+                   Row rowCol = sheet.getRow(row);
+                   
+                   
+                   Cell numberFlight = rowCol.getCell(0);
+                   Cell airPlane = rowCol.getCell(1);
+                   Cell origin = rowCol.getCell(2);
+                   Cell destinity = rowCol.getCell(3);
+                   Cell status = rowCol.getCell(4);
+                   
+                   model.addRow(new Object[] {numberFlight,airPlane,origin,destinity,status,"Detail"});
+
+               }
+           } catch (IOException ex) {
+               Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }
+       
+    }//GEN-LAST:event_btnImportDocActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

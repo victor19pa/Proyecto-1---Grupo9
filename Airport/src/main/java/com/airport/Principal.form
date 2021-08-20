@@ -116,6 +116,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Import Document"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImportDocActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="scrollPaneMain">
               <AuxValues>
@@ -490,7 +493,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="rBtnNonAvailable" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnExportCatalog" alignment="0" pref="180" max="32767" attributes="0"/>
+                          <Component id="btnExportCatalog" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
