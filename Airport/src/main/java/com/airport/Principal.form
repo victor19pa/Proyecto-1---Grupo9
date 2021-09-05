@@ -93,7 +93,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="43" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -207,7 +207,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jScrollPane1" alignment="1" min="-2" pref="684" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="btnAddFlight" min="-2" pref="99" max="-2" attributes="0"/>
@@ -245,28 +245,27 @@
                                   <Component id="lblStatus" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jTextExpectedArrivalTime" max="32767" attributes="0"/>
-                                      <Component id="jTextExpectedDepartureTime" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="rBtnLanded" min="-2" max="-2" attributes="0"/>
-                                              <Component id="rBtnCancel" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace pref="88" max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="rBtnDelayed" min="-2" max="-2" attributes="0"/>
-                                              <Component id="rBtnActived" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jTextExpectedArrivalTime" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextExpectedDepartureTime" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="rBtnLanded" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rBtnCancel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="88" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="rBtnDelayed" min="-2" max="-2" attributes="0"/>
+                                          <Component id="rBtnActived" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="txtDepartureTime" min="-2" pref="217" max="-2" attributes="0"/>
-                                  <Component id="txtArrivalTime" min="-2" pref="217" max="-2" attributes="0"/>
+                                  <Component id="txtDepartureTime" pref="217" max="32767" attributes="0"/>
+                                  <Component id="txtArrivalTime" pref="217" max="32767" attributes="0"/>
+                                  <Component id="jButton1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="19" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -322,7 +321,7 @@
                           <Component id="rBtnActived" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboAirplane" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="rBtnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="rBtnDelayed" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -330,9 +329,12 @@
                           <Component id="btnAddFlight" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="lblArrivalTime3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblArrivalTime3" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="270" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="309" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -350,6 +352,7 @@
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="text" type="java.lang.String" value="Write here the flight binnacle, there you can be very extensive&#xa;&#xa;&#xa;WEATHER (Here you can write the weater information)&#xa;&#xa;&#xa;&#xa;&#xa;INCIDENTS&#xa;&#xa;&#xa;&#xa;&#xa;EXTRA INFORMATION"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -504,6 +507,14 @@
                 <Property name="text" type="java.lang.String" value="Flight Binnacle:"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Weather"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panelAirplanes">
@@ -543,7 +554,7 @@
                                       <Component id="txtModelAirplane" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="128" max="32767" attributes="0"/>
+                              <EmptySpace pref="141" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -634,6 +645,7 @@
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="btnGroupAirplanes"/>
                 </Property>
+                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Available"/>
               </Properties>
             </Component>
