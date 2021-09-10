@@ -6,24 +6,22 @@
 package Entities;
 
 import java.util.Date;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
+@Getter @Setter @ToString
 
 public class EFlight {
     private int idFlight;
     private String origin;
     private String destiny;
     private String departureTime;
-    private String expectedDepartureTime;
+    private int expectedTime;
     private String arrivalTime;
-    private String expectedArrivalTime;
+    private int expectedArrivalTime;
     private String airline;
     private String binnacle;
-    private String status;
+    private char status;
     private int airplane;
 }

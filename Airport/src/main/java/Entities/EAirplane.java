@@ -5,13 +5,11 @@
  */
 package Entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
+@Getter @Setter @ToString
 public class EAirplane {
     private int idAirplane;
     private String model;
